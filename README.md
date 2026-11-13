@@ -28,18 +28,21 @@ Phase 2: Scanning & Network Discovery
 
 
 
- Liability Disclaimer
+Liability Disclaimer
 
 I have performed these activities only on the systems & devices where I had secured written permission or the devices/systems that I own myself. All these materials are for education and research purpose only. Do not use anything from here to break the law. The instructor, the authors and Networkwalks are not responsible for what you do with this knowledge. Every action you take is your own responsibility. Misuse can lead to criminal charges, heavy fines, loss of your job and a permanent record. In most countries unauthorised access is a crime even when nothing is damaged.
  
- Introduction
+
+Introduction
 
 This report covers footprinting the networkwalks.com domain using multiple Kali Linux tools (W2-PM1) and scanning my own local network with Zenmap (W2-PM5). One module covers the footprinting phase and the other covers the scanning phase, so together they show how an attacker moves from gathering public information to mapping live hosts on a network. It is the Week 2 part of my ongoing internship program at Networkwalks.
 All commands were run in Kali Linux (footprinting) and on a Windows PC with Zenmap installed (scanning). Every step below includes the exact command used, the result I observed, a screenshot as evidence, and a short note on why the finding matters from an attacker's point of view.
 
 
-4. Tools Used
+Tools Used
+
 The table below lists each tool used in this report and its purpose.
+
 Tool	Purpose
 Kali Linux & Windows	Operating systems used for reconnaissance activities
 WHOIS	Find domain registration details (owner, dates, name servers).
@@ -51,8 +54,11 @@ dnsrecon	Enumerate all DNS records (NS, MX, SPF, TXT, SRV).
 Zenmap (Nmap GUI)	Scan the local subnet to find live hosts, IPs and MAC addresses.
 Windows CMD	Local IP and MAC address identification
 
-5. Activities Performed
-4.1 Footprinting & Reconnaissance
+
+Activities Performed
+
+Footprinting & Reconnaissance
+
 
 I performed reconnaissance against the networkwalks.com domain using six Kali Linux tools: WHOIS, WhatWeb, Nslookup, Curl, Wafw00f and DNSRecon. Each tool was used to collect a different type of information about the target.
 First, I used WHOIS to obtain publicly available domain registration information and identify the domain’s name servers. The results provided information about the domain registration and hosting infrastructure.
@@ -62,13 +68,19 @@ I used Curl with the -I option to inspect the HTTP response headers. This provid
 Next, I used Wafw00f to determine whether a Web Application Firewall was protecting the website. The result identified ModSecurity (SpiderLabs).
 Finally, I used DNSRecon to enumerate DNS records. The results provided information relating to name servers, mail servers, SPF/TXT records, service records and DNS software information
 
-4.2 Network Scanning with Zenmap
+
+Network Scanning with Zenmap
+
+
 For the second activity, I used Zenmap to perform network discovery on my local network. The practical required me to identify my local IP address and subnet, discover live hosts, identify their IP and MAC addresses, and generate a network topology.
 I first used the Windows ipconfig command to identify my local IP address and LAN subnet. I then entered the subnet into Zenmap and selected Quick Scan to identify active hosts. The scan showed 256 IP addresses with 7 hosts up. I did once intense scan too.
 The results also included six MAC addresses.
 After completing the scan, I opened the Topology section in Zenmap, enabled the legend and saved the network topology in png format as required by the practical task
 
-5. Risk Analysis / Impact
+
+Risk Analysis / Impact
+
+
 Based on the information collected during the footprinting and network scanning activities, I identified the following potential risks.
 #	Risk / Finding	Evidence / Observation	Potential Impact	Risk Level
 1	Web technology information exposed	WhatWeb identified WordPress and WP Download Manager	Attackers may use exposed technology/version information to identify software requiring further security review	● Medium
@@ -78,7 +90,9 @@ Based on the information collected during the footprinting and network scanning 
 5	DNS infrastructure information exposed	DNSRecon identified DNS, mail and service-related records	DNS information can help build a broader infrastructure profile	● Medium
 6	Multiple live hosts visible on local network	Zenmap identified four live hosts in the example network	Unknown or unauthorized devices may potentially be present on a network	● Medium
 
+
 Risk level key:  ● Critical  ● Medium  ● Low
+
 
 The risks above are observations from the footprinting and scanning exercises, not confirmed vulnerabilities.
 The practical exercises primarily involved information gathering and host discovery. No exploitation or vulnerability validation was performed as part of these two modules.
